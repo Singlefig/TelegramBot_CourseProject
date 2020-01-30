@@ -32,26 +32,9 @@ namespace TelegramBotWantedCarsList
 
         void getCarsInfo()
         {
-            //string fileName = @"C:\Users\singlefig-ap\Downloads\mvswantedtransport_1.json";
             string fileName = @"C:\Users\singlefig-ap\Downloads\cars.json";
             //using (StreamReader file = File.OpenText(@"C:\Users\singlefig-ap\Downloads\mvswantedtransport_1.json"))
-            //var carsInfos = JsonConvert.DeserializeObject<List<CarInfoRoot>>(File.ReadAllText(fileName));
             cars = JsonConvert.DeserializeObject<List<CarInfo>>(File.ReadAllText(fileName));
-            //sb = new StringBuilder();
-            //foreach (var car in cars)
-            //{
-            //    string currentCar = $"ID:{car.ID}\n" +
-            //         $"OVD:{ car.OVD}\n" +
-            //         $"BRAND:{ car.BRAND}\n" +
-            //         $"COLOR:{ car.COLOR}\n" +
-            //         $"VEHICLENUMBER:{ car.VEHICLENUMBER}\n" +
-            //         $"BODYNUMBER:{ car.BODYNUMBER}\n" +
-            //         $"CHASSISNUMBER:{ car.CHASSISNUMBER}\n" +
-            //         $"ENGINENUMBER:{ car.ENGINENUMBER}\n" +
-            //         $"THEFT_DATA:{ car.THEFT_DATA}\n" +
-            //         $"INSERT_DATE:{car.INSERT_DATE}\n";
-            //    sb.Append(currentCar);
-            //}
         }
 
         async void bw_DoWork(object sender, DoWorkEventArgs e)
@@ -384,6 +367,11 @@ namespace TelegramBotWantedCarsList
                                     "INSERT_DATE:" + car.INSERT_DATE + "\n");
                             }
                         }
+                        else if (message.Text == "/help")
+                        {
+                            await Bot.SendTextMessageAsync(message.Chat.Id, "Available commands:\n/list - get list of wanted cars\n/find - check parameter to find a car\n/stop - stop the bot\n/test - test command");
+                        }
+
                     }
                 };
 
@@ -416,7 +404,7 @@ namespace TelegramBotWantedCarsList
                     {
                         foreach (var item in cars)
                         {
-                            if(item.OVD == value)
+                            if(item.OVD.Contains(value))
                             {
                                 foundCars.Add(item);
                             }
@@ -427,7 +415,7 @@ namespace TelegramBotWantedCarsList
                     {
                         foreach (var item in cars)
                         {
-                            if (item.BRAND == value)
+                            if (item.BRAND.Contains(value))
                             {
                                 foundCars.Add(item);
                             }
@@ -438,7 +426,7 @@ namespace TelegramBotWantedCarsList
                     {
                         foreach (var item in cars)
                         {
-                            if (item.COLOR == value)
+                            if (item.COLOR.Contains(value))
                             {
                                 foundCars.Add(item);
                             }
@@ -449,7 +437,7 @@ namespace TelegramBotWantedCarsList
                     {
                         foreach (var item in cars)
                         {
-                            if (item.VEHICLENUMBER == value)
+                            if (item.VEHICLENUMBER.Contains(value))
                             {
                                 foundCars.Add(item);
                             }
@@ -460,7 +448,7 @@ namespace TelegramBotWantedCarsList
                     {
                         foreach (var item in cars)
                         {
-                            if (item.BODYNUMBER == value)
+                            if (item.BODYNUMBER.Contains(value))
                             {
                                 foundCars.Add(item);
                             }
@@ -471,7 +459,7 @@ namespace TelegramBotWantedCarsList
                     {
                         foreach (var item in cars)
                         {
-                            if (item.CHASSISNUMBER == value)
+                            if (item.CHASSISNUMBER.Contains(value))
                             {
                                 foundCars.Add(item);
                             }
@@ -482,7 +470,7 @@ namespace TelegramBotWantedCarsList
                     {
                         foreach (var item in cars)
                         {
-                            if (item.ENGINENUMBER == value)
+                            if (item.ENGINENUMBER.Contains(value))
                             {
                                 foundCars.Add(item);
                             }
@@ -493,7 +481,7 @@ namespace TelegramBotWantedCarsList
                     {
                         foreach (var item in cars)
                         {
-                            if (item.THEFT_DATA == value)
+                            if (item.THEFT_DATA.Contains(value))
                             {
                                 foundCars.Add(item);
                             }
@@ -504,7 +492,7 @@ namespace TelegramBotWantedCarsList
                     {
                         foreach (var item in cars)
                         {
-                            if (item.INSERT_DATE == value)
+                            if (item.INSERT_DATE.Contains(value))
                             {
                                 foundCars.Add(item);
                             }
