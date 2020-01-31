@@ -217,154 +217,217 @@ namespace TelegramBotWantedCarsList
                         else if (messages[0] == "/find" && messages[1] == "OVD")
                         {
                             List<CarInfo> carInfos = FindCar(messages[1], messages[2]);
-                            foreach (var car in carInfos)
+                            if (carInfos.Count > 0)
                             {
-                                await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
-                                    "OVD:" + car.OVD + "\n" +
-                                    "BRAND:" + car.BRAND + "\n" +
-                                    "COLOR:" + car.COLOR + "\n" +
-                                    "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                    "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                    "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                    "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                    "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                    "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                foreach (var car in carInfos)
+                                {
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                        "OVD:" + car.OVD + "\n" +
+                                        "BRAND:" + car.BRAND + "\n" +
+                                        "COLOR:" + car.COLOR + "\n" +
+                                        "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
+                                        "BODYNUMBER:" + car.BODYNUMBER + "\n" +
+                                        "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
+                                        "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
+                                        "THEFT_DATA:" + car.THEFT_DATA + "\n" +
+                                        "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                }
+                            }
+                            else
+                            {
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "Didn't found any car by this request.");
                             }
                         }
                         else if (messages[0] == "/find" && messages[1] == "BRAND")
                         {
                             List<CarInfo> carInfos = FindCar(messages[1], messages[2]);
-                            foreach (var car in carInfos)
+                            if (carInfos.Count > 0)
                             {
-                                await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
-                                    "OVD:" + car.OVD + "\n" +
-                                    "BRAND:" + car.BRAND + "\n" +
-                                    "COLOR:" + car.COLOR + "\n" +
-                                    "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                    "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                    "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                    "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                    "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                    "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                foreach (var car in carInfos)
+                                {
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                        "OVD:" + car.OVD + "\n" +
+                                        "BRAND:" + car.BRAND + "\n" +
+                                        "COLOR:" + car.COLOR + "\n" +
+                                        "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
+                                        "BODYNUMBER:" + car.BODYNUMBER + "\n" +
+                                        "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
+                                        "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
+                                        "THEFT_DATA:" + car.THEFT_DATA + "\n" +
+                                        "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                }
+                            }
+                            else
+                            {
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "Didn't found any car by this request.");
                             }
                         }
                         else if (messages[0] == "/find" && messages[1] == "COLOR")
                         {
                             List<CarInfo> carInfos = FindCar(messages[1], messages[2]);
-                            foreach (var car in carInfos)
+                            if (carInfos.Count > 0)
                             {
-                                await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
-                                    "OVD:" + car.OVD + "\n" +
-                                    "BRAND:" + car.BRAND + "\n" +
-                                    "COLOR:" + car.COLOR + "\n" +
-                                    "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                    "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                    "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                    "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                    "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                    "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                foreach (var car in carInfos)
+                                {
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                        "OVD:" + car.OVD + "\n" +
+                                        "BRAND:" + car.BRAND + "\n" +
+                                        "COLOR:" + car.COLOR + "\n" +
+                                        "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
+                                        "BODYNUMBER:" + car.BODYNUMBER + "\n" +
+                                        "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
+                                        "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
+                                        "THEFT_DATA:" + car.THEFT_DATA + "\n" +
+                                        "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                }
+                            }
+                            else
+                            {
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "Didn't found any car by this request.");
                             }
                         }
                         else if (messages[0] == "/find" && messages[1] == "VEHICLENUMBER")
                         {
                             List<CarInfo> carInfos = FindCar(messages[1], messages[2]);
-                            foreach (var car in carInfos)
+                            if (carInfos.Count > 0)
                             {
-                                await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
-                                    "OVD:" + car.OVD + "\n" +
-                                    "BRAND:" + car.BRAND + "\n" +
-                                    "COLOR:" + car.COLOR + "\n" +
-                                    "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                    "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                    "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                    "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                    "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                    "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                foreach (var car in carInfos)
+                                {
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                        "OVD:" + car.OVD + "\n" +
+                                        "BRAND:" + car.BRAND + "\n" +
+                                        "COLOR:" + car.COLOR + "\n" +
+                                        "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
+                                        "BODYNUMBER:" + car.BODYNUMBER + "\n" +
+                                        "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
+                                        "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
+                                        "THEFT_DATA:" + car.THEFT_DATA + "\n" +
+                                        "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                }
+                            }
+                            else
+                            {
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "Didn't found any car by this request.");
                             }
                         }
                         else if (messages[0] == "/find" && messages[1] == "BODYNUMBER")
                         {
                             List<CarInfo> carInfos = FindCar(messages[1], messages[2]);
-                            foreach (var car in carInfos)
+                            if (carInfos.Count > 0)
                             {
-                                await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
-                                    "OVD:" + car.OVD + "\n" +
-                                    "BRAND:" + car.BRAND + "\n" +
-                                    "COLOR:" + car.COLOR + "\n" +
-                                    "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                    "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                    "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                    "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                    "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                    "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                foreach (var car in carInfos)
+                                {
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                        "OVD:" + car.OVD + "\n" +
+                                        "BRAND:" + car.BRAND + "\n" +
+                                        "COLOR:" + car.COLOR + "\n" +
+                                        "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
+                                        "BODYNUMBER:" + car.BODYNUMBER + "\n" +
+                                        "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
+                                        "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
+                                        "THEFT_DATA:" + car.THEFT_DATA + "\n" +
+                                        "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                }
+                            }
+                            else
+                            {
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "Didn't found any car by this request.");
                             }
                         }
                         else if (messages[0] == "/find" && messages[1] == "CHASSISNUMBER")
                         {
                             List<CarInfo> carInfos = FindCar(messages[1], messages[2]);
-                            foreach (var car in carInfos)
+                            if (carInfos.Count > 0)
                             {
-                                await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
-                                    "OVD:" + car.OVD + "\n" +
-                                    "BRAND:" + car.BRAND + "\n" +
-                                    "COLOR:" + car.COLOR + "\n" +
-                                    "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                    "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                    "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                    "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                    "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                    "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                foreach (var car in carInfos)
+                                {
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                        "OVD:" + car.OVD + "\n" +
+                                        "BRAND:" + car.BRAND + "\n" +
+                                        "COLOR:" + car.COLOR + "\n" +
+                                        "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
+                                        "BODYNUMBER:" + car.BODYNUMBER + "\n" +
+                                        "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
+                                        "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
+                                        "THEFT_DATA:" + car.THEFT_DATA + "\n" +
+                                        "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                }
+                            }
+                            else
+                            {
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "Didn't found any car by this request.");
                             }
                         }
                         else if (messages[0] == "/find" && messages[1] == "ENGINENUMBER")
                         {
                             List<CarInfo> carInfos = FindCar(messages[1], messages[2]);
-                            foreach (var car in carInfos)
+                            if (carInfos.Count > 0)
                             {
-                                await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
-                                    "OVD:" + car.OVD + "\n" +
-                                    "BRAND:" + car.BRAND + "\n" +
-                                    "COLOR:" + car.COLOR + "\n" +
-                                    "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                    "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                    "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                    "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                    "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                    "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                foreach (var car in carInfos)
+                                {
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                        "OVD:" + car.OVD + "\n" +
+                                        "BRAND:" + car.BRAND + "\n" +
+                                        "COLOR:" + car.COLOR + "\n" +
+                                        "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
+                                        "BODYNUMBER:" + car.BODYNUMBER + "\n" +
+                                        "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
+                                        "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
+                                        "THEFT_DATA:" + car.THEFT_DATA + "\n" +
+                                        "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                }
+                            }
+                            else
+                            {
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "Didn't found any car by this request.");
                             }
                         }
                         else if (messages[0] == "/find" && messages[1] == "THEFT_DATA")
                         {
                             List<CarInfo> carInfos = FindCar(messages[1], messages[2]);
-                            foreach (var car in carInfos)
+                            if (carInfos.Count > 0)
                             {
-                                await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
-                                    "OVD:" + car.OVD + "\n" +
-                                    "BRAND:" + car.BRAND + "\n" +
-                                    "COLOR:" + car.COLOR + "\n" +
-                                    "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                    "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                    "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                    "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                    "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                    "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                foreach (var car in carInfos)
+                                {
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                        "OVD:" + car.OVD + "\n" +
+                                        "BRAND:" + car.BRAND + "\n" +
+                                        "COLOR:" + car.COLOR + "\n" +
+                                        "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
+                                        "BODYNUMBER:" + car.BODYNUMBER + "\n" +
+                                        "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
+                                        "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
+                                        "THEFT_DATA:" + car.THEFT_DATA + "\n" +
+                                        "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                }
+                            }
+                            else
+                            {
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "Didn't found any car by this request.");
                             }
                         }
                         else if (messages[0] == "/find" && messages[1] == "INSERT_DATE")
                         {
                             List<CarInfo> carInfos = FindCar(messages[1], messages[2]);
-                            foreach (var car in carInfos)
+                            if (carInfos.Count > 0)
                             {
-                                await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
-                                    "OVD:" + car.OVD + "\n" +
-                                    "BRAND:" + car.BRAND + "\n" +
-                                    "COLOR:" + car.COLOR + "\n" +
-                                    "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                    "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                    "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                    "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                    "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                    "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                foreach (var car in carInfos)
+                                {
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                        "OVD:" + car.OVD + "\n" +
+                                        "BRAND:" + car.BRAND + "\n" +
+                                        "COLOR:" + car.COLOR + "\n" +
+                                        "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
+                                        "BODYNUMBER:" + car.BODYNUMBER + "\n" +
+                                        "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
+                                        "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
+                                        "THEFT_DATA:" + car.THEFT_DATA + "\n" +
+                                        "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                }
+                            }
+                            else
+                            {
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "Didn't found any car by this request.");
                             }
                         }
                         else if (message.Text == "/help")
@@ -502,7 +565,7 @@ namespace TelegramBotWantedCarsList
                 default:
                     break;
             }
-            return foundCars;
+                return foundCars;
         }
     }
 }
