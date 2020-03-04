@@ -18,9 +18,6 @@ namespace TelegramBotWantedCarsList
     {
         BackgroundWorker bw;
         List<CarInfo> cars = new List<CarInfo>();
-        int offset = 0;
-        //string carsList;
-        //StringBuilder sb;
         public Form1()
         {
             InitializeComponent();
@@ -32,7 +29,7 @@ namespace TelegramBotWantedCarsList
 
         void getCarsInfo()
         {
-            string fileName = @"C:\Users\singlefig-ap\Downloads\cars.json";
+            string fileName = @"C:\Users\singlefig-ap\Downloads\cars1.json";
             //using (StreamReader file = File.OpenText(@"C:\Users\singlefig-ap\Downloads\mvswantedtransport_1.json"))
             cars = JsonConvert.DeserializeObject<List<CarInfo>>(File.ReadAllText(fileName));
         }
@@ -46,7 +43,6 @@ namespace TelegramBotWantedCarsList
                 var Bot = new Telegram.Bot.TelegramBotClient(key); // инициализируем API
                 await Bot.SetWebhookAsync("");
                 //Bot.SetWebhook(""); // Обязательно! убираем старую привязку к вебхуку для бота
-                 // отступ по сообщениям
 
                 Bot.OnCallbackQuery += async (object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev) =>
                 {
@@ -120,8 +116,6 @@ namespace TelegramBotWantedCarsList
                         }
                         else if (message.Text == "/stop")
                         {
-                            //await Bot.StopPollAsync(message.Chat.Id,message.MessageId);
-                            // в ответ на команду /saysomething выводим сообщение
                             await Bot.SendTextMessageAsync(message.Chat.Id, "Stopped!",
                                    replyToMessageId: message.MessageId);
                         }
@@ -133,7 +127,7 @@ namespace TelegramBotWantedCarsList
                                 //if (count < 20)
                                 //{
                                 //    count++;
-                                await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.Id + "\n" +
                                     "OVD:" + car.OVD + "\n" +
                                     "BRAND:" + car.BRAND + "\n" +
                                     "COLOR:" + car.COLOR + "\n" +
@@ -158,7 +152,6 @@ namespace TelegramBotWantedCarsList
                                                                 {
                                                                    Text = "OVD",
                                                                    CallbackData = "OVD"
-
                                                                 },
 
                                                                 // Second column
@@ -211,7 +204,6 @@ namespace TelegramBotWantedCarsList
                                                             }
                                                 }
                                             );
-
                             await Bot.SendTextMessageAsync(message.Chat.Id, "Choose parameter which bot will use to find:", Telegram.Bot.Types.Enums.ParseMode.Default, false, false, 0, keyboard);
                         }
                         else if (messages[0] == "/find" && messages[1] == "OVD")
@@ -221,7 +213,7 @@ namespace TelegramBotWantedCarsList
                             {
                                 foreach (var car in carInfos)
                                 {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.Id + "\n" +
                                         "OVD:" + car.OVD + "\n" +
                                         "BRAND:" + car.BRAND + "\n" +
                                         "COLOR:" + car.COLOR + "\n" +
@@ -245,7 +237,7 @@ namespace TelegramBotWantedCarsList
                             {
                                 foreach (var car in carInfos)
                                 {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.Id + "\n" +
                                         "OVD:" + car.OVD + "\n" +
                                         "BRAND:" + car.BRAND + "\n" +
                                         "COLOR:" + car.COLOR + "\n" +
@@ -269,7 +261,7 @@ namespace TelegramBotWantedCarsList
                             {
                                 foreach (var car in carInfos)
                                 {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.Id + "\n" +
                                         "OVD:" + car.OVD + "\n" +
                                         "BRAND:" + car.BRAND + "\n" +
                                         "COLOR:" + car.COLOR + "\n" +
@@ -293,7 +285,7 @@ namespace TelegramBotWantedCarsList
                             {
                                 foreach (var car in carInfos)
                                 {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.Id + "\n" +
                                         "OVD:" + car.OVD + "\n" +
                                         "BRAND:" + car.BRAND + "\n" +
                                         "COLOR:" + car.COLOR + "\n" +
@@ -317,7 +309,7 @@ namespace TelegramBotWantedCarsList
                             {
                                 foreach (var car in carInfos)
                                 {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.Id + "\n" +
                                         "OVD:" + car.OVD + "\n" +
                                         "BRAND:" + car.BRAND + "\n" +
                                         "COLOR:" + car.COLOR + "\n" +
@@ -341,7 +333,7 @@ namespace TelegramBotWantedCarsList
                             {
                                 foreach (var car in carInfos)
                                 {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.Id + "\n" +
                                         "OVD:" + car.OVD + "\n" +
                                         "BRAND:" + car.BRAND + "\n" +
                                         "COLOR:" + car.COLOR + "\n" +
@@ -365,7 +357,7 @@ namespace TelegramBotWantedCarsList
                             {
                                 foreach (var car in carInfos)
                                 {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.Id + "\n" +
                                         "OVD:" + car.OVD + "\n" +
                                         "BRAND:" + car.BRAND + "\n" +
                                         "COLOR:" + car.COLOR + "\n" +
@@ -389,7 +381,7 @@ namespace TelegramBotWantedCarsList
                             {
                                 foreach (var car in carInfos)
                                 {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.Id + "\n" +
                                         "OVD:" + car.OVD + "\n" +
                                         "BRAND:" + car.BRAND + "\n" +
                                         "COLOR:" + car.COLOR + "\n" +
@@ -413,7 +405,7 @@ namespace TelegramBotWantedCarsList
                             {
                                 foreach (var car in carInfos)
                                 {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.ID + "\n" +
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.Id + "\n" +
                                         "OVD:" + car.OVD + "\n" +
                                         "BRAND:" + car.BRAND + "\n" +
                                         "COLOR:" + car.COLOR + "\n" +
@@ -455,7 +447,6 @@ namespace TelegramBotWantedCarsList
                 this.bw.RunWorkerAsync(text); // запускаем
                 getCarsInfo();
             }
-            
         }
 
         public List<CarInfo> FindCar(string parameter, string value)
