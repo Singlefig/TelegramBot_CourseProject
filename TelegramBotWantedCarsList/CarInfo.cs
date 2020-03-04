@@ -1,7 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
-
-namespace TelegramBotWantedCarsList
+﻿namespace TelegramBotWantedCarsList
 {
     public class CarInfo
     {

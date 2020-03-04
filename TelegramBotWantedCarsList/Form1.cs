@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Telegram.Bot.Types.ReplyMarkups;
 
 
@@ -18,6 +19,7 @@ namespace TelegramBotWantedCarsList
     {
         BackgroundWorker bw;
         List<CarInfo> cars = new List<CarInfo>();
+        List<UserSubscribes> users = new List<UserSubscribes>();
         public Form1()
         {
             InitializeComponent();
@@ -29,14 +31,51 @@ namespace TelegramBotWantedCarsList
 
         void getCarsInfo()
         {
-            string fileName = @"C:\Users\singlefig-ap\Downloads\cars1.json";
+            string fileName = @"C:\Users\singlefig-ap\Downloads\cars.json";
             //using (StreamReader file = File.OpenText(@"C:\Users\singlefig-ap\Downloads\mvswantedtransport_1.json"))
             cars = JsonConvert.DeserializeObject<List<CarInfo>>(File.ReadAllText(fileName));
+        }
+
+        void getUsers()
+        {
+            string fileName = @"C:\Users\singlefig-ap\Downloads\users.json";
+            users = JsonConvert.DeserializeObject<List<UserSubscribes>>(File.ReadAllText(fileName));
+        }
+
+        void setUsers(UserSubscribes user)
+        {
+            JObject usersToFile = new JObject(
+                new JProperty("Id", user.Id),
+                new JProperty("Name", user.Name),
+                new JProperty("Subscribes", user.Subscribes)
+                ); 
+            using (StreamWriter file = File.CreateText(@"C:\Users\singlefig-ap\Downloads\users.json"))
+            using (JsonTextWriter writer = new JsonTextWriter(file))
+            {
+                usersToFile.WriteTo(writer);
+            }
+        }
+
+        void updateUsers(string Id,string subscribe)
+        {
+            string fileName = @"C:\Users\singlefig-ap\Downloads\users.json";
+            string json = File.ReadAllText(fileName);
+            List<UserSubscribes> usersSubs = JsonConvert.DeserializeObject<List<UserSubscribes>>(json);
+            foreach (var user in usersSubs)
+            {
+                if(user.Id == Id)
+                {
+                    user.Subscribes.Add(subscribe);
+                }
+            }
+            string output = JsonConvert.SerializeObject(usersSubs, Formatting.Indented);
+            File.WriteAllText(fileName, output);
         }
 
         async void bw_DoWork(object sender, DoWorkEventArgs e)
         {
             var worker = sender as BackgroundWorker;
+            bool isSub = false;
             var key = e.Argument as String; // получаем ключ из аргументов
             try
             {
@@ -118,6 +157,40 @@ namespace TelegramBotWantedCarsList
                         {
                             await Bot.SendTextMessageAsync(message.Chat.Id, "Stopped!",
                                    replyToMessageId: message.MessageId);
+                        }
+                        else if(message.Text == "/subscribe")
+                        {
+                            getUsers();
+                            isSub = true;
+                            await Bot.SendTextMessageAsync(message.Chat.Id, "Please write car number to subscribe on it",
+                                   replyToMessageId: message.MessageId);
+                        }
+                        else if (isSub)
+                        {
+                            if(CheckUser(message.Chat.Id.ToString()))
+                            {
+                                UserSubscribes user = new UserSubscribes
+                                {
+                                    Id = message.Chat.Id.ToString(),
+                                    Name = message.Chat.Username,
+                                    Subscribes = new List<string>() { message.Text }
+                                };
+                                users.Add(user);
+                                setUsers(user);
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "Yuo have been subscribed on"+message.Text);
+                            }
+                            else
+                            {
+                                foreach (var user in users)
+                                {
+                                    if (user.Id == message.Chat.Id.ToString())
+                                    {
+                                        user.Subscribes.Add(message.Text);
+                                        updateUsers(user.Id, message.Text);
+                                    }
+                                }
+
+                            }
                         }
                         else if (message.Text == "/list")
                         {
@@ -424,7 +497,7 @@ namespace TelegramBotWantedCarsList
                         }
                         else if (message.Text == "/help")
                         {
-                            await Bot.SendTextMessageAsync(message.Chat.Id, "Available commands:\n/list - get list of wanted cars\n/find - check parameter to find a car\n/stop - stop the bot\n/test - test command");
+                            await Bot.SendTextMessageAsync(message.Chat.Id, "Available commands:\n/list - get list of wanted cars\n/find - check parameter to find a car\n/stop - stop the bot\n/subscribe - subscribe on car number\n/test - test command");
                         }
 
                     }
@@ -447,6 +520,18 @@ namespace TelegramBotWantedCarsList
                 this.bw.RunWorkerAsync(text); // запускаем
                 getCarsInfo();
             }
+        }
+
+        public bool CheckUser(string userId)
+        {
+            foreach (var user in users)
+            {
+                if(user.Id == userId)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public List<CarInfo> FindCar(string parameter, string value)
