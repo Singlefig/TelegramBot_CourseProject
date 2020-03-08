@@ -26,7 +26,6 @@ namespace TelegramBotWantedCarsList
 
             this.bw = new BackgroundWorker();
             bw.DoWork += this.bw_DoWork;
-
         }
 
         void getCarsInfo()
@@ -40,6 +39,22 @@ namespace TelegramBotWantedCarsList
         {
             string fileName = @"C:\Users\singlefig-ap\Downloads\users.json";
             users = JsonConvert.DeserializeObject<List<UserSubscribes>>(File.ReadAllText(fileName));
+        }
+
+        List<CarInfo> checkCarForUserSubscribes()
+        {
+            List<CarInfo> foundCars = new List<CarInfo>();
+            for (int i = 0; i < users.Count; i++)
+            {
+                for (int j = 0; j < cars.Count; j++)
+                {
+                    if (users[i].Subscribes.Contains(cars[j].VEHICLENUMBER))
+                    {
+                        foundCars.Add(cars[j]);
+                    }
+                }
+            }
+            return foundCars;
         }
 
         void setUsers(UserSubscribes user)
@@ -63,7 +78,7 @@ namespace TelegramBotWantedCarsList
             List<UserSubscribes> usersSubs = JsonConvert.DeserializeObject<List<UserSubscribes>>(json);
             foreach (var user in usersSubs)
             {
-                if(user.Id == Id)
+                if(user.Id == Id && !user.Subscribes.Contains(subscribe))
                 {
                     user.Subscribes.Add(subscribe);
                 }
@@ -189,17 +204,28 @@ namespace TelegramBotWantedCarsList
                                         updateUsers(user.Id, message.Text);
                                     }
                                 }
-
+                                List<CarInfo> result = checkCarForUserSubscribes();
+                                foreach (var car in result)
+                                {
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "This car was found\n"+"ID:" + car.Id + "\n" +
+                                    "OVD:" + car.OVD + "\n" +
+                                    "BRAND:" + car.BRAND + "\n" +
+                                    "COLOR:" + car.COLOR + "\n" +
+                                    "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
+                                    "BODYNUMBER:" + car.BODYNUMBER + "\n" +
+                                    "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
+                                    "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
+                                    "THEFT_DATA:" + car.THEFT_DATA + "\n" +
+                                    "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                }
                             }
+
                         }
                         else if (message.Text == "/list")
                         {
                             await Bot.SendTextMessageAsync(message.Chat.Id, $"List of wanted cars:");
                             foreach (var car in cars)
                             {
-                                //if (count < 20)
-                                //{
-                                //    count++;
                                 await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.Id + "\n" +
                                     "OVD:" + car.OVD + "\n" +
                                     "BRAND:" + car.BRAND + "\n" +
@@ -210,7 +236,6 @@ namespace TelegramBotWantedCarsList
                                     "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
                                     "THEFT_DATA:" + car.THEFT_DATA + "\n" +
                                     "INSERT_DATE:" + car.INSERT_DATE + "\n");
-                                //}
                             }
                         }
                         else if (message.Text == "/find")
@@ -519,6 +544,7 @@ namespace TelegramBotWantedCarsList
             {
                 this.bw.RunWorkerAsync(text); // запускаем
                 getCarsInfo();
+                getUsers();
             }
         }
 
