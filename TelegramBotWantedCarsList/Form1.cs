@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -124,7 +119,7 @@ namespace TelegramBotWantedCarsList
                 };
                 Bot.OnUpdate += async (object su, Telegram.Bot.Args.UpdateEventArgs evu) =>
                 {
-                    if (evu.Update.CallbackQuery != null || evu.Update.InlineQuery != null) return; // в этом блоке нам келлбэки и инлайны не нужны
+                    if (evu.Update.CallbackQuery != null || evu.Update.InlineQuery != null) return; 
                     var update = evu.Update;
                     var message = update.Message;
                     var messages = message.Text.Split(';');
@@ -135,6 +130,23 @@ namespace TelegramBotWantedCarsList
                         {
                             await Bot.SendTextMessageAsync(message.Chat.Id, "test",
                                    replyToMessageId: message.MessageId);
+                        }
+                        else if(message.Text == "/check")
+                        {
+                            List<CarInfo> result = checkCarForUserSubscribes();
+                            foreach (var car in result)
+                            {
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "This car was found\n" + "ID:" + car.Id + "\n" +
+                                "OVD:" + car.OVD + "\n" +
+                                "BRAND:" + car.BRAND + "\n" +
+                                "COLOR:" + car.COLOR + "\n" +
+                                "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
+                                "BODYNUMBER:" + car.BODYNUMBER + "\n" +
+                                "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
+                                "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
+                                "THEFT_DATA:" + car.THEFT_DATA + "\n" +
+                                "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                            }
                         }
                         else if(message.Text == "/subscribe")
                         {
@@ -332,7 +344,7 @@ namespace TelegramBotWantedCarsList
                         }
                         else if (message.Text == "/help")
                         {
-                            await Bot.SendTextMessageAsync(message.Chat.Id, "Available commands:\n/find - check parameter to find a car\n/subscribe - subscribe on car number\n/unsubscribe - unsubscribe from car number");
+                            await Bot.SendTextMessageAsync(message.Chat.Id, "Available commands:\n/find - check parameter to find a car\n/subscribe - subscribe on car number\n/unsubscribe - unsubscribe from car number\n/check - check your subscribes in database");
                         }
 
                     }
