@@ -13,8 +13,8 @@ namespace TelegramBotWantedCarsList
     public partial class Form1 : Form
     {
         BackgroundWorker bw;
-        List<CarInfo> cars = new List<CarInfo>();
-        List<UserSubscribes> users = new List<UserSubscribes>();
+        public List<CarInfo> cars = new List<CarInfo>();
+        public List<UserSubscribes> users = new List<UserSubscribes>();
         public Form1()
         {
             InitializeComponent();
@@ -23,19 +23,19 @@ namespace TelegramBotWantedCarsList
             bw.DoWork += this.bw_DoWork;
         }
 
-        void getCarsInfo()
+        public void getCarsInfo()
         {
             string fileName = @"C:\Users\singlefig-ap\source\repos\TelegramBotWantedCarsList\mvswantedtransport_1.json";
             cars = JsonConvert.DeserializeObject<List<CarInfo>>(File.ReadAllText(fileName));
         }
 
-        void getUsers()
+        public void getUsers()
         {
             string fileName = @"C:\Users\singlefig-ap\source\repos\TelegramBotWantedCarsList\users.json";
             users = JsonConvert.DeserializeObject<List<UserSubscribes>>(File.ReadAllText(fileName));
         }
 
-        List<CarInfo> checkCarForUserSubscribes()
+        public List<CarInfo> checkCarForUserSubscribes()
         {
             List<CarInfo> foundCars = new List<CarInfo>();
             for (int i = 0; i < users.Count; i++)
@@ -51,7 +51,7 @@ namespace TelegramBotWantedCarsList
             return foundCars;
         }
 
-        void setUsers(UserSubscribes user)
+        public void setUsers(UserSubscribes user)
         {
             JObject usersToFile = new JObject(
                 new JProperty("Id", user.Id),
@@ -65,7 +65,7 @@ namespace TelegramBotWantedCarsList
             }
         }
 
-        void updateUsers(string Id,string subscribe)
+        public void updateUsers(string Id,string subscribe)
         {
             string fileName = @"C:\Users\singlefig-ap\source\repos\TelegramBotWantedCarsList\users.json";
             string json = File.ReadAllText(fileName);
@@ -179,22 +179,8 @@ namespace TelegramBotWantedCarsList
                                         updateUsers(user.Id, message.Text);
                                     }
                                 }
-                                List<CarInfo> result = checkCarForUserSubscribes();
-                                foreach (var car in result)
-                                {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "This car was found\n"+"ID:" + car.Id + "\n" +
-                                    "OVD:" + car.OVD + "\n" +
-                                    "BRAND:" + car.BRAND + "\n" +
-                                    "COLOR:" + car.COLOR + "\n" +
-                                    "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                    "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                    "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                    "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                    "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                    "INSERT_DATE:" + car.INSERT_DATE + "\n");
-                                }
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "You have been subscribed on " + message.Text);
                             }
-
                         }
                         else if (message.Text == "/find")
                         {
@@ -325,22 +311,8 @@ namespace TelegramBotWantedCarsList
                                         updateUsers(user.Id, message.Text);
                                     }
                                 }
-                                List<CarInfo> result = checkCarForUserSubscribes();
-                                foreach (var car in result)
-                                {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "This car was found\n" + "ID:" + car.Id + "\n" +
-                                    "OVD:" + car.OVD + "\n" +
-                                    "BRAND:" + car.BRAND + "\n" +
-                                    "COLOR:" + car.COLOR + "\n" +
-                                    "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                    "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                    "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                    "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                    "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                    "INSERT_DATE:" + car.INSERT_DATE + "\n");
-                                }
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "You have been unsubscribed from " + message.Text);
                             }
-
                         }
                         else if (message.Text == "/help")
                         {
