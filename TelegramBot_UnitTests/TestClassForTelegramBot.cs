@@ -8,7 +8,7 @@ namespace TelegramBot_UnitTests
     [TestClass]
     public class TestClassForTelegramBot
     {
-        Form1 f1 = new Form1();
+        BotOptions f1 = new BotOptions();
         List<CarInfo> cars = new List<CarInfo>();
         List<UserSubscribes> users = new List<UserSubscribes>();
         [TestMethod]

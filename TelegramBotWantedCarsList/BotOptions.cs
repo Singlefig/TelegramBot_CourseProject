@@ -10,12 +10,12 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace TelegramBotWantedCarsList
 {
-    public partial class Form1 : Form
+    public partial class BotOptions : Form
     {
         BackgroundWorker bw;
         public List<CarInfo> cars = new List<CarInfo>();
         public List<UserSubscribes> users = new List<UserSubscribes>();
-        public Form1()
+        public BotOptions()
         {
             InitializeComponent();
 
@@ -134,18 +134,25 @@ namespace TelegramBotWantedCarsList
                         else if(message.Text == "/check")
                         {
                             List<CarInfo> result = checkCarForUserSubscribes();
-                            foreach (var car in result)
+                            if (result.Count > 0)
                             {
-                                await Bot.SendTextMessageAsync(message.Chat.Id, "This car was found\n" + "ID:" + car.Id + "\n" +
-                                "OVD:" + car.OVD + "\n" +
-                                "BRAND:" + car.BRAND + "\n" +
-                                "COLOR:" + car.COLOR + "\n" +
-                                "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                foreach (var car in result)
+                                {
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "This car was found\n" + "ID:" + car.Id + "\n" +
+                                    "Місце реєстрації:" + car.OVD + "\n" +
+                                    "Бренд:" + car.BRAND + "\n" +
+                                    "Колір:" + car.COLOR + "\n" +
+                                    "Державний номер:" + car.VEHICLENUMBER + "\n" +
+                                    "Номер кузову:" + car.BODYNUMBER + "\n" +
+                                    "Номер шасі:" + car.CHASSISNUMBER + "\n" +
+                                    "Номер двигуна:" + car.ENGINENUMBER + "\n" +
+                                    "Дата викрадення:" + car.THEFT_DATA + "\n" +
+                                    "Дата додавання в сховище:" + car.INSERT_DATE + "\n");
+                                }
+                            }
+                            else
+                            {
+                                await Bot.SendTextMessageAsync(message.Chat.Id,"Nothing found by your request.");
                             }
                         }
                         else if(message.Text == "/subscribe")
@@ -181,6 +188,7 @@ namespace TelegramBotWantedCarsList
                                 }
                                 await Bot.SendTextMessageAsync(message.Chat.Id, "You have been subscribed on " + message.Text);
                             }
+                            isSub = false;
                         }
                         else if (message.Text == "/find")
                         {
@@ -215,16 +223,16 @@ namespace TelegramBotWantedCarsList
                             {
                                 foreach (var car in carInfos)
                                 {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.Id + "\n" +
-                                        "OVD:" + car.OVD + "\n" +
-                                        "BRAND:" + car.BRAND + "\n" +
-                                        "COLOR:" + car.COLOR + "\n" +
-                                        "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                        "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                        "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                        "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                        "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                        "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "This car was found\n" + "ID:" + car.Id + "\n" +
+                                "Місце реєстрації:" + car.OVD + "\n" +
+                                "Бренд:" + car.BRAND + "\n" +
+                                "Колір:" + car.COLOR + "\n" +
+                                "Державний номер:" + car.VEHICLENUMBER + "\n" +
+                                "Номер кузову:" + car.BODYNUMBER + "\n" +
+                                "Номер шасі:" + car.CHASSISNUMBER + "\n" +
+                                "Номер двигуна:" + car.ENGINENUMBER + "\n" +
+                                "Дата викрадення:" + car.THEFT_DATA + "\n" +
+                                "Дата додавання в сховище:" + car.INSERT_DATE + "\n");
                                 }
                             }
                             else
@@ -239,16 +247,16 @@ namespace TelegramBotWantedCarsList
                             {
                                 foreach (var car in carInfos)
                                 {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.Id + "\n" +
-                                        "OVD:" + car.OVD + "\n" +
-                                        "BRAND:" + car.BRAND + "\n" +
-                                        "COLOR:" + car.COLOR + "\n" +
-                                        "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                        "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                        "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                        "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                        "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                        "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "This car was found\n" + "ID:" + car.Id + "\n" +
+                                 "Місце реєстрації:" + car.OVD + "\n" +
+                                 "Бренд:" + car.BRAND + "\n" +
+                                 "Колір:" + car.COLOR + "\n" +
+                                 "Державний номер:" + car.VEHICLENUMBER + "\n" +
+                                 "Номер кузову:" + car.BODYNUMBER + "\n" +
+                                 "Номер шасі:" + car.CHASSISNUMBER + "\n" +
+                                 "Номер двигуна:" + car.ENGINENUMBER + "\n" +
+                                 "Дата викрадення:" + car.THEFT_DATA + "\n" +
+                                 "Дата додавання в сховище:" + car.INSERT_DATE + "\n");
                                 }
                             }
                             else
@@ -263,16 +271,16 @@ namespace TelegramBotWantedCarsList
                             {
                                 foreach (var car in carInfos)
                                 {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "ID:" + car.Id + "\n" +
-                                        "OVD:" + car.OVD + "\n" +
-                                        "BRAND:" + car.BRAND + "\n" +
-                                        "COLOR:" + car.COLOR + "\n" +
-                                        "VEHICLENUMBER:" + car.VEHICLENUMBER + "\n" +
-                                        "BODYNUMBER:" + car.BODYNUMBER + "\n" +
-                                        "CHASSISNUMBER:" + car.CHASSISNUMBER + "\n" +
-                                        "ENGINENUMBER:" + car.ENGINENUMBER + "\n" +
-                                        "THEFT_DATA:" + car.THEFT_DATA + "\n" +
-                                        "INSERT_DATE:" + car.INSERT_DATE + "\n");
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "This car was found\n" + "ID:" + car.Id + "\n" +
+                                "Місце реєстрації:" + car.OVD + "\n" +
+                                "Бренд:" + car.BRAND + "\n" +
+                                "Колір:" + car.COLOR + "\n" +
+                                "Державний номер:" + car.VEHICLENUMBER + "\n" +
+                                "Номер кузову:" + car.BODYNUMBER + "\n" +
+                                "Номер шасі:" + car.CHASSISNUMBER + "\n" +
+                                "Номер двигуна:" + car.ENGINENUMBER + "\n" +
+                                "Дата викрадення:" + car.THEFT_DATA + "\n" +
+                                "Дата додавання в сховище:" + car.INSERT_DATE + "\n");
                                 }
                             }
                             else
@@ -313,10 +321,15 @@ namespace TelegramBotWantedCarsList
                                 }
                                 await Bot.SendTextMessageAsync(message.Chat.Id, "You have been unsubscribed from " + message.Text);
                             }
+                            isUnSub = false;
                         }
                         else if (message.Text == "/help")
                         {
                             await Bot.SendTextMessageAsync(message.Chat.Id, "Available commands:\n/find - check parameter to find a car\n/subscribe - subscribe on car number\n/unsubscribe - unsubscribe from car number\n/check - check your subscribes in database");
+                        }
+                        else
+                        {
+                            await Bot.SendTextMessageAsync(message.Chat.Id, "Unknown command. Try /help to see list of commands");
                         }
 
                     }
@@ -330,14 +343,21 @@ namespace TelegramBotWantedCarsList
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void startButton_Click(object sender, EventArgs e)
         {
-            var text = textBox1.Text;
+            var text = tokenTextField.Text;
             if (!string.IsNullOrEmpty(text) && this.bw.IsBusy != true)
             {
-                this.bw.RunWorkerAsync(text);
-                getCarsInfo();
-                getUsers();
+                if (text == "1064410371:AAFZgAB2Nly164KTF5F2FpJAWdhTDRSwKzI")
+                {
+                    this.bw.RunWorkerAsync(text);
+                    getCarsInfo();
+                    getUsers();
+                }
+                else
+                {
+                    MessageBox.Show("Wrong Telegram Token");
+                }
             }
         }
 
